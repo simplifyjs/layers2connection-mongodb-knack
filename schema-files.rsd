@@ -1,0 +1,116 @@
+<api:script xmlns:api="http://apiscript.com/ns?v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- See Column Definitions to specify column behavior and use XPaths to extract column values from JSON. -->
+  <api:info title="records" desc="Generated schema file." xmlns:other="http://apiscript.com/ns?v1">
+    <!-- You can modify the name, type, and column size here. -->
+    <attr name="field_1372"     xs:type="integer" readonly="false"              other:xPath="/json/records/field_1372"     />
+    <attr name="field_1372_raw" xs:type="integer" readonly="false"              other:xPath="/json/records/field_1372_raw" />
+    <attr name="field_1373"     xs:type="string"  readonly="false"              other:xPath="/json/records/field_1373"     />
+    <attr name="field_1373_raw" xs:type="double"  readonly="false"              other:xPath="/json/records/field_1373_raw" />
+    <attr name="field_1419"     xs:type="integer" readonly="false"              other:xPath="/json/records/field_1419"     />
+    <attr name="field_1419_raw" xs:type="integer" readonly="false"              other:xPath="/json/records/field_1419_raw" />
+    <attr name="id"             xs:type="string"  readonly="false"   key="true"    other:xPath="/json/records/id"             />
+  </api:info>
+
+  <api:set attr="DataModel" value="DOCUMENT" />
+  <api:set attr="URI" value="https://api.knack.com/v1/objects/object_99/records" />
+  <api:set attr="ContentType" value="application/json" />
+  <api:set attr="JSONPath" value="$.records" />
+
+  <!-- The GET method corresponds to SELECT. Here you can override the default processing of the SELECT statement. The results of processing are pushed to the schema's output. See SELECT Execution for more information. -->
+  <api:script method="GET">
+  <api:set  attr="EnablePaging"                         value="TRUE" />
+  <api:set  attr="pagenumberparam"                      value="page" />
+  <api:set  attr="pagesizeparam"                        value="rows_per_page" />
+  <api:set  attr="pagesize"                             value="100" />
+      <api:call op="jsonproviderGet">
+      <api:push/>
+    </api:call>
+  </api:script>
+
+  <!-- To add support for INSERTS please see the INSERT Execution page within the help for further information and examples. -->
+  <api:script method="POST">
+    <api:set attr="method" value="POST"/>
+    <api:set attr="uri" value="https://api.knack.com/v1/objects/object_99/records" />
+    <api:set attr="RepeatElement" value="/" />
+      <api:set attr="data">
+        {
+          <api:set attr="temp.data.insertRecord" value="" />
+          <api:check attr="_input.field_1372">
+            <api:set attr="temp.data.insertRecord" value='[temp.data.insertRecord], "field_1340": "[_input.field_1372]"' />
+          </api:check>
+          <api:check attr="_input.field_1372_raw">
+            <api:set attr="temp.data.insertRecord" value='[temp.data.insertRecord], "field_1372_raw": "[_input.field_1372_raw]"' />
+          </api:check>
+          <api:check attr="_input.field_1373">
+            <api:set attr="temp.data.insertRecord" value='[temp.data.insertRecord], "field_1373": "[_input.field_1373]"' />
+          </api:check>
+          <api:check attr="_input.field_1373_raw">
+            <api:set attr="temp.data.insertRecord" value='[temp.data.insertRecord], "field_1373_raw": "[_input.field_1373_raw]"' />
+          </api:check>
+          <api:check attr="_input.field_1419">
+            <api:set attr="temp.data.insertRecord" value='[temp.data.insertRecord], "field_1419": "[_input.field_1419]"' />
+          </api:check>
+          <api:check attr="_input.field_1419_raw">
+            <api:set attr="temp.data.insertRecord" value='[temp.data.insertRecord], "field_1419_raw": "[_input.field_1419_raw]"' />
+          </api:check>
+          [temp.data.insertRecord | remove(0, 2)]
+        }
+    </api:set>
+    <api:call op="jsonproviderGet">
+      <api:throw code="500" desc="Inserts are not currently supported."/>
+      <api:push/>
+    </api:call>
+  </api:script>
+
+  <!-- To add support for UPDATES please see the UPDATE Execution page within the help for further information and examples. -->
+  <api:script method="MERGE">
+    <api:set attr="method" value="PUT"/>
+    <api:validate attr="_input.id" desc="The ID is a required input for the PUT operation" />
+    <api:set attr="uri" value="https://api.knack.com/v1/objects/object_99/records/[_input.id]" />
+    <api:set attr="RepeatElement" value="/" />
+    <!-- Updates a record -->
+    <api:set attr="RepeatElement" value="/" />
+    <!-- Updates a record -->
+    <api:set attr="data">
+      {
+        <api:set attr="temp.data.updateRecord" value="" />
+        <api:check attr="_input.field_1372">
+          <api:set attr="temp.data.updateRecord" value='[temp.data.updateRecord], "field_1372": [_input.field_1372  | jsonescape()]' />
+        </api:check>
+        <api:check attr="_input.field_1372_raw">
+          <api:set attr="temp.data.updateRecord" value='[temp.data.updateRecord], "field_1372_raw": [_input.field_1372_raw  | jsonescape()]' />
+        </api:check>
+        <api:check attr="_input.field_1373">
+          <api:set attr="temp.data.updateRecord" value='[temp.data.updateRecord], "field_1373": [_input.field_1373  | jsonescape()]' />
+        </api:check>
+        <api:check attr="_input.field_1373_raw">
+          <api:set attr="temp.data.updateRecord" value='[temp.data.updateRecord], "field_1373_raw": [_input.field_1373_raw  | jsonescape()]' />
+        </api:check>
+        <api:check attr="_input.field_1419">
+          <api:set attr="temp.data.updateRecord" value='[temp.data.updateRecord], "field_1419": [_input.field_1419  | jsonescape()]' />
+        </api:check>
+        <api:check attr="_input.field_1419_raw">
+            <api:set attr="temp.data.updateRecord" value='[temp.data.updateRecord], "field_1419_raw": [_input.field_1419_raw  | jsonescape()]' />
+        </api:check>
+        [temp.data.updateRecord | remove(0, 2)]
+      }
+    </api:set>
+    <api:call op="jsonproviderGet">
+      <api:throw code="500" desc="Updates are not currently supported."/>
+      <api:push/>
+    </api:call>
+  </api:script>
+
+  <!-- To add support for DELETES please see the DELETE Execution page within the help for further information and examples. -->
+  <api:script method="DELETE">
+    <api:set attr="method" value="DELETE"/>
+        <api:set attr="_input.id" />
+    <api:set attr="uri" value="https://api.knack.com/v1/objects/object_99/records/[_input.id]" />
+    <api:call op="jsonproviderGet">
+      <api:throw code="500" desc="Deletes are not currently supported."/>
+      <api:push/>
+    </api:call>
+  </api:script>
+
+</api:script>

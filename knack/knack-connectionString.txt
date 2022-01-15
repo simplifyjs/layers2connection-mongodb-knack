@@ -1,0 +1,2 @@
+URI=https://api.knack.com/v1/objects/OBJECT_ID/records;CustomHeaders='X-Knack-Application-Id:APPLICATION_ID
+X-Knack-REST-API-Key:API_KEY';GenerateSchemaFiles=OnStart;Location=C:\Users\User\Documents\schema-files;Other="BatchSize=1";

@@ -1,0 +1,1 @@
+Server=cluster0-shard-00-01.mongodb.net;Port=0000;ReplicaSet=cluster0-shard-00-00.mongodb.net:0000,cluster0-shard-00-02.mongodb.net:0000;AuthDatabase=admin;Database=DATABASENAME;User=USERNAME;UseSSL=true;
